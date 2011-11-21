@@ -1,0 +1,163 @@
+/*!
+ * jQuery Mobile v1.0a3
+ * http://jquerymobile.com/
+ *
+ * Copyright 2010, jQuery Project
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ */
+/*
+* jQuery Mobile Framework
+* Copyright (c) jQuery Project
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* Note: Code is in draft form and is subject to change 
+*/
+
+
+/* G
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-bar-g {
+	border: 1px solid 		#A2A2A;
+	background: 			#111111;
+	color: 					#000000;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #00000;
+	background-image: -moz-linear-gradient(top, 
+							#3c3c3c, 
+							#111111);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 	#ededed),
+		color-stop(1, 		#aaaaaa));
+  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ededed', EndColorStr='#aaaaaa')";
+}
+
+.ui-bar-new-g{
+    background: #054066;
+    background-image: -moz-linear-gradient(top, 
+                            #054066, 
+                            #00578e);
+    background-image: -webkit-gradient(linear,left top,left bottom,
+        color-stop(0,       #ffffff),
+        color-stop(1,       #ffffff));
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#ffffff ')";
+}
+
+
+/**.ui-bar-g {
+	border: 1px solid 		#B3B3B3;
+	background: 			#e9eaeb;
+	color: 					#3E3E3E;
+	font-weight: bold;
+	text-shadow: 0 1px 1px 	#fff;
+	background-image: -moz-linear-gradient(top, 
+							#f0f0f0,
+							#e9eaeb);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+			color-stop(0, 	#ededed),
+			color-stop(1, 	#cccccc));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ededed', EndColorStr='#cccccc')";
+}**/
+
+.ui-bar-g,
+.ui-bar-g input,
+.ui-bar-g select,
+.ui-bar-g textarea,
+.ui-bar-g button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-body-g {
+	border: 1px solid 		#B3B3B3;
+	color: 					#333333;
+	text-shadow: 0 1px 0 	#fff;
+	background: 			#f0f0f0;
+	background-image: -moz-linear-gradient(top, 
+							#eeeeee, 
+							#dddddd);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#eeeeee),
+		color-stop(1, 		#dddddd));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#dddddd')";
+}
+.ui-body-g,
+.ui-body-g input,
+.ui-body-g select,
+.ui-body-g textarea,
+.ui-body-g button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-body-g .ui-link-inherit {
+	color: 					#333333;
+}
+.ui-body-g .ui-link {
+	color: 					#2489CE;
+	font-weight: bold;
+}
+/*
+Gradient used for expend title bar
+
+*/
+
+.ui-btn-up-g {
+
+
+border: 1px solid 		#A2A2A;
+	background: 			#111111;
+	color: 					#000000;
+	font-weight: normal;
+	cursor: pointer;
+	text-decoration: none;
+	text-shadow: 0 -1px 1px #00000;
+	background-image: -moz-linear-gradient(top, 
+							#3c3c3c, 
+							#111111);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 	#efefef),
+		color-stop(1, 		#ffffff));
+  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#efefef', EndColorStr='#ffffff')";
+	
+}
+.ui-btn-up-g a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+
+.ui-btn-hover-g {
+	border: 1px solid 		#bbb;
+	background: 			#dadada;
+	font-weight: bold;
+	color: 					#101010;
+	text-decoration: none;
+	text-shadow: 0 1px 1px 	#fff;
+	background-image: -moz-linear-gradient(top, 
+							#ededed, 
+							#dadada);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#ededed),
+		color-stop(1, 		#dadada));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ededed', EndColorStr='#dadada')";
+}
+.ui-btn-hover-g a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+.ui-btn-down-g {
+	border: 1px solid 		#808080;
+	background: 			#fdfdfd;
+	font-weight: bold;
+	color: 					#111111;
+	text-shadow: 0 1px 1px 	#ffffff;
+	background-image: -moz-linear-gradient(top, 
+							#eeeeee, 
+							#fdfdfd);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#eeeeee),
+		color-stop(1, 		#fdfdfd));
+  	-msfilter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#fdfdfd')";
+}
+.ui-btn-down-g a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+.ui-btn-up-g,
+.ui-btn-hover-g,
+.ui-btn-down-g {
+	font-family: Helvetica, Arial, sans-serif;
+}
