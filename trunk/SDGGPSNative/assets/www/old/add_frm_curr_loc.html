@@ -1,0 +1,222 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+		<title>GPS Demo Application</title>
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1"/>
+		
+		<link rel="stylesheet" href="./map/jquery.mobile.min.css" />
+		<style rel="stylesheet">
+			body {  background: #ddd; }
+			.ui-body-c a.ui-link { color: #008595; font-weight: bold; text-decoration: none; }
+			.hidden { display:none; }
+			h2 { font-size: 16px; overflow: hidden; white-space: nowrap; display: block; }
+			.more { text-align: center; }
+		</style>
+		<script type="text/javascript" src="./map/js.js"></script>
+		<script type="text/javascript" src="./map/jquery-1.6.1.min.js"></script>	
+		<script type="text/javascript">
+			// Demonstration purpose only...
+			$(document).bind("mobileinit", function () {
+				$.mobile.ajaxEnabled  = true;
+			});
+		</script>
+		<script type="text/javascript" src="./map/jquery.mobile.min.js"></script>
+		<script type="text/javascript" src="./ui/jquery.ui.map.js"></script>
+		<script type="text/javascript" src="./ui/jquery.ui.map.services.js"></script>
+		<script type="text/javascript" src="./ui/jquery.ui.map.extensions.js"></script>
+				
+	</head>
+	<body> 
+
+		<div id="gmap-4" class="" data-role="page">
+
+			<div data-role="header">
+				<h1>Sites direction from current address</h1>
+			</div>
+
+			<script type="text/javascript">
+			
+				
+				
+				$('#gmap-4').live("pagecreate", function() {
+
+					getCurrentLocation();
+					
+				});
+
+				function markOutLocation(lat,long) {
+					
+					var geocoder = new GClientGeocoder();
+					var latlng = new GLatLng(lat, long);
+					var address; 
+						geocoder.getLocations(latlng, function(addresses) {
+							address = addresses.Placemark[0].address;
+							alert(address);
+						});
+					};
+				function getCurrentLocation() {
+					// Check for geolocation support	
+					if (navigator.geolocation) {
+						// Get current position
+						navigator.geolocation.getCurrentPosition(function (position) {
+						//markOutLocation(position.coords.latitude, position.coords.longitude);
+						// Success!
+						$('#map_canvas').gmap({'center': ''+position.coords.latitude+', '+position.coords.longitude+'' }).bind('init', function(evt, map) {
+									$('#map_canvas').gmap('addMarker', {'position': map.getCenter(), 'animation': google.maps.Animation.DROP }).click(function() { 
+										$('#map_canvas').gmap('openInfoWindow', { 'content': '<h5>Your location: </br>Lati : '+position.coords.latitude+', Long : '+position.coords.longitude+'</h5>'}, this);
+									});
+								});
+						$('#map_canvas').gmap().bind('init', function() { 
+				            $.getJSON( 'json.json', function(data) { 
+				            	$('#twitList').append('<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a"></ul>');
+			                    listItems = $('#twitList').find('ul');
+				                $.each( data.markers, function(i, m) {
+				                    $('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(m.lat, m.lng), 'animation': google.maps.Animation.DROP  } );
+									// Create list at tis time only 
+				                        html = '';
+				                        html += '<a data-ajax="false" href="#directions_map" id="testt" style="color:black; font-size:12px"> <u>'+m.title+ '</u></br>Address : '+m.add+' </br>Contact No: '+m.contactno+'</a>';
+				                        
+				                        listItems.append('<li>'+html+'</li>');
+					                });
+			                    // Need to refresh list after AJAX call
+			                    $('#twitList ul').listview();
+			                
+				            });
+				        });
+						$('#map_canvas').gmap('option', 'zoom', 10);
+						}, 
+							function () {
+								// Gelocation fallback: Defaults to Stockholm, Sweden
+								alert("Unable to find current location 1");
+								$('#map_canvas').gmap({'center': '28.111111, 77.111111' }).bind('init', function(evt, map) {
+									$('#map_canvas').gmap('addMarker', {'position': map.getCenter(), 'animation': google.maps.Animation.DROP }).click(function() { 
+										$('#map_canvas').gmap('openInfoWindow', { 'content': '<h5>Your location: </br>Lati : '+position.coords.latitude+', Long : '+position.coords.longitude+'</h5>'}, this);
+									});
+								});
+						$('#map_canvas').gmap().bind('init', function() { 
+				            $.getJSON( 'json.json', function(data) { 
+				            	$('#twitList').append('<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="a"></ul>');
+			                    listItems = $('#twitList').find('ul');
+				                $.each( data.markers, function(i, m) {
+				                    $('#map_canvas').gmap('addMarker', { 'position': new google.maps.LatLng(m.lat, m.lng), 'animation': google.maps.Animation.DROP  } );
+									// Create list at tis time only 
+				                        html = '';
+				                        html += '<a data-ajax="false" href="#directions_map" style="color:black; font-size:12px"> <u>'+m.title+ '</u></br>Address : '+m.add+' </br>Contact No: '+m.contactno+'</a>';
+				                        
+				                        listItems.append('<li>'+html+'</li>');
+					                });
+			                    // Need to refresh list after AJAX call
+			                    $('#twitList ul').listview();
+			                
+				            });
+				        });
+						$('#map_canvas').gmap('option', 'zoom', 4);
+							
+							}
+						);
+					}
+					else {
+						// No geolocation fallback: Defaults to Eeaster Island, Chile
+						alert("Unable to find current location 2");
+					}
+				};
+
+
+
+				////////////////////////////////////////////////////////////
+				
+				$('#directions_map').live("pageshow", function() {
+					$('#map_canvas_1').gmap('refresh');
+					$('#map_canvas_1').gmap('getCurrentPosition', function(position, status) {
+						if ( status === 'OK' ) {
+							var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+							$('#map_canvas_1').gmap('get', 'map').panTo(latlng);
+							$('#map_canvas_1').gmap('search', { 'location': latlng }, function(results, status) {
+								if ( status === 'OK' ) {
+									$('#from').val(results[0].formatted_address);
+								}
+							});
+						} else {
+							alert('Unable to get current position');
+						}
+					});
+				});
+				
+				$('#directions_map').live("pagecreate", function() {
+					$('#map_canvas_1').gmap({'center': '59.3426606750, 18.0736160278'});
+					$('#submit').click(function() {
+						$('#map_canvas_1').gmap('displayDirections', { 'origin': $('#from').val(), 'destination': $('#to').val(), 'travelMode': google.maps.DirectionsTravelMode.DRIVING }, { 'panel': document.getElementById('directions')}, function(response, status) {
+							if ( status === 'OK' ) {
+								$('#results').show();
+							} else {
+								$('#results').hide();
+							}
+						});
+						return false;
+					});
+				});
+				
+				////////////////////////////////////////////////////////////
+				
+				$('#gps_map').live("pageshow", function() {
+					$('#map_canvas_2').gmap('refresh');
+				});
+				
+				$('#gps_map').live("pagecreate", function() {
+					$('#map_canvas_2').gmap({'center': '59.3426606750, 18.0736160278', 'mapTypeId': 'terrain'}).bind('init', function(evt, map) {
+						$('#map_canvas_2').gmap('watchPosition', function(position, status) {
+							if ( status === 'OK' ) {
+								var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+								var marker = $('#map_canvas_2').gmap('get', 'markers > client' );
+								if ( !marker ) {
+									$('#map_canvas_2').gmap('addMarker', { 'id': 'client', 'position': latlng, 'bounds': true });
+								} else {
+									marker.setPosition(latlng);
+									map.panTo(latlng);
+								}
+							}
+						});
+					});
+				});
+				
+					
+				
+			</script>
+			<div class="page" data-role="content">
+				
+				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+					<div id="map_canvas" style="height:300px;"></div>
+				</div>
+				<div id="twitList"></div>
+			</div>
+		</div>
+		
+		<div id="directions_map" data-role="page">
+			<div data-role="header" data-add-back-btn="true">
+				<h1>GPS Demo Application</h1>
+			</div>
+			<div data-role="content">	
+				<div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
+					<div id="map_canvas_1" style="height:300px;"></div>
+					<p>
+						<label for="from">From</label>
+						<input id="from" class="ui-bar-c" type="text" value="noida, India" />
+					</p>
+					<p>
+						<label for="to">To</label>
+						<input id="to" class="ui-bar-c" type="text" value="New delhi, India" />
+					</p>
+					<a id="submit" href="#" data-role="button" data-icon="search">Get directions</a>
+				</div>
+				<div id="results" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" style="display:none;">
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined">Results</div>
+					<div id="directions"></div>
+					<div class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-bottom ui-btn-up-undefined"></div>
+				</div>
+			</div>
+		</div>
+		
+		
+		</body>
+	
+</html>

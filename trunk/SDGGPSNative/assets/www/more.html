@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>GPS Demo Application</title>
+
+<link rel="stylesheet" href="./map/jquery.mobile.min.css" />
+<script type="text/javascript" src="./map/js.js"></script>
+<script type="text/javascript" src="./map/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="./map/jquery.mobile.min.js"></script>
+<script type="text/javascript" src="./ui/jquery.ui.map.js"></script>
+<script type="text/javascript" src="./ui/jquery.ui.map.services.js"></script>
+<script type="text/javascript" src="./ui/jquery.ui.map.extensions.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#siteslist").html('');
+	$.getJSON( 'sites.json', function(data) {
+    $.each( data.markers, function(i, m) {
+		// Create list at tis time only
+        html = '';
+        $("#siteslist").append('<li><a href="#" style="color:black; font-size:12px"><p><u><font  face="arial" color="#3a73ba"><b>'+m.title+ '</b></font></u><br> Address : '+m.add+' <br>Contact No: '+m.contactno+'</p></a></li>');
+        $("#siteslist").listview();
+	    $("#siteslist").listview("refresh");	
+	});
+    $("#siteslist").append('<li id="moreId"><a href="#" OnClick=\"DoAction('+i+');\"  style="color:black; font-size:12px"><p><u><font  face="arial" color="#3a73ba"><b>More Items</b></font></u></p></a></li>');
+    $("#siteslist").listview();
+    $("#siteslist").listview("refresh");
+});
+
+
+});
+
+
+
+var i = 1;
+function DoAction()
+	{
+	 if(i === 1){
+		 $("#moreId").remove();
+			$.getJSON( 'sites1.json', function(data) {
+			    $.each( data.markers, function(i, m) {
+	            	$("#siteslist").append('<li><a href="#"  style="color:black; font-size:12px"><p><u><font  face="arial" color="#3a73ba"><b>'+m.title+ '</b></font></u><br> Address : '+m.add+' <br>Contact No: '+m.contactno+'</p></a></li>');
+	            	$("#siteslist").listview();
+				    $("#siteslist").listview("refresh");	
+				});
+	        });
+			
+		}
+		i++;
+	};
+</script>
+</head>
+
+<body>
+<div data-role="page" data-iscroll="enable"><!-- Header  Start -->
+<div data-role="header" data-backbtn="false" data-position="inline"
+	data-theme="a">
+<h1>GPS Demo Header</h1>
+
+</div>
+
+<!-- content  Start -->
+<div data-role="content" style="color: black; font-size: 15px">
+<div data-iscroll="scroller">
+
+<div style="padding-left: 1%;">
+<div class="content-primary">
+<ul data-role="listview" data-inset="true" id="siteslist">
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

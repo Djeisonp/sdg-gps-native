@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>GPS Demo Application</title>
+<link rel="stylesheet"
+	href="./jquery.mobile-1.0a3/jquery.mobile-1.0a3.min.css" />
+<script type="text/javascript" src="./jqm/jquery-1.5.min.js"></script>
+<script type="text/javascript"
+	src="./jquery.mobile-1.0a3/jquery.mobile-1.0a3.min.js"></script>
+<script type="text/javascript" src="./scroll/iscroll.js"></script>
+
+<script src="jquery.mobile.iscroll.js"></script>
+<link rel="stylesheet" href="geThemes.css">
+
+<!--  alert : End--->
+</head>
+
+<body>
+<div data-role="page" data-iscroll="enable"><!-- Header  Start -->
+<div data-role="header" data-backbtn="false" data-position="inline"
+	data-theme="a">
+<h1>GPS Demo Header</h1>
+
+</div>
+
+<!-- content  Start -->
+<div data-role="content" style="color: black; font-size: 15px">
+<div data-iscroll="scroller">
+
+<div class="content-primary">
+
+<form action="#" method="get">
+
+<p>SDG GPS demo.</p>
+
+<div data-role="fieldcontain"><label for="select-choice-1"
+	class="select">Choose Option 1:</label> <select name="select-choice-1"
+	id="select-choice-1">
+	<option value="Option1">Option 1</option>
+	<option value="Option2">Option 2</option>
+	<option value="Option3">Option 3</option>
+	<option value="Option4">Option 4</option>
+</select></div>
+
+<div data-role="fieldcontain"><label for="select-choice-2"
+	class="select">Choose Option 2:</label> <select name="select-choice-2"
+	id="select-choice-2">
+	<option value="Option1">Option - 2 - 1</option>
+	<option value="Option2">Option - 2- 2</option>
+	<option value="Option3">Option - 2 - 3</option>
+	<option value="Option4">Option - 2 - 4</option>
+</select></div>
+
+<div data-role="fieldcontain"><label for="select-choice-3"
+	class="select">Enter Search Area :</label> <select
+	name="select-choice-3" id="select-choice-3">
+	<option value="Option1">25 miles</option>
+	<option value="Option2">50 miles</option>
+	<option value="Option3">75 miles</option>
+	<option value="Option4">100 miles</option>
+</select></div>
+
+
+<div><a href="add_frm_curr_loc.html" rel="external"
+	data-role="button" data-theme="d" id="btn-current-location">Current
+location</a></div>
+
+<div><a href="add_frm_provided_loc.html" rel="external"
+	data-role="button" data-theme="d" id="btn-enter-address"
+	onClick="setText()">Enter address</a></div>
+
+
+<br/><br/><br/><br/>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
